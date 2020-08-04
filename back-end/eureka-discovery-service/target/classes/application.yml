@@ -1,0 +1,28 @@
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    hostname: localhost
+
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-discovery
+
+zuul:
+  routes:
+    login-service:
+      path: /login-service/**
+      url: http://localhost:8081
+    company-service:
+      path: /company-service/**
+      url: http://localhost:8082
+    excel-service:
+      path: /excel-service/**
+      url: http://localhost:8083
+    exchange-service:
+      path: /exchange-service/**
+      url: http://localhost:8084

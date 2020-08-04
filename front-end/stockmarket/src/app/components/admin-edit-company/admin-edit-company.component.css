@@ -1,0 +1,25 @@
+.fill-remaining-space {
+    flex: 1 1 auto;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  .form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .form-element {
+    padding: 5px 0px 25px 2px;
+    width: 100%;
+  }
+
+  button{
+    transition: transform .2s; /* Animation */
+}
+button:hover{
+    transform: scale(1.2); 
+}

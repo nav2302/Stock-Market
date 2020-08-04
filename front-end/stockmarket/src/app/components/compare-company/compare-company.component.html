@@ -1,0 +1,110 @@
+<app-navbar></app-navbar>
+<div class="mb-4"></div>
+<div class="col-sm-6 mx-auto mb-4 text-center" novalidate>
+  <form class="form" [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    
+    <mat-form-field class="form-element">
+      <mat-label>EXCHANGE</mat-label>
+      <mat-select formControlName="exchange">
+        <mat-option *ngFor="let pos of stockExchanges" [value]="pos">
+          {{pos}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="companyForm.get('exchange').hasError('required')">
+        You must make a selection
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-card class="mat-elevation-z8">
+      <mat-card-content>
+        <mat-form-field class="form-element">
+          <input matInput placeholder="First Company" formControlName="company1" [matAutocomplete]="auto">
+          <mat-error *ngIf="!companyForm.controls['company1'].valid && companyForm.controls['company1'].touched">
+            {{ getErrorCompany1() }}
+          </mat-error>
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                <span>{{ option.name }}</span>
+                <small> | CODE: {{option.code}}</small>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput placeholder="Second Company" formControlName="company2" [matAutocomplete]="auto">
+          <mat-error *ngIf="!companyForm.controls['company2'].valid && companyForm.controls['company2'].touched">
+            {{ getErrorCompany2() }}
+          </mat-error>
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading" class="is-loading">
+              <mat-spinner diameter="50"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                <span>{{ option.name }}</span>
+                <small> | CODE: {{option.code}}</small>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput type="date" placeholder="Start Date" formControlName="startDate">
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input matInput type="date" placeholder="End Date" formControlName="endDate">
+        </mat-form-field>
+
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button">Compare</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+
+<!-- Not used now -->
+<div *ngIf="!hideGraphDiv" class="container-fluid mb-4">
+  <div style="display: block">
+    <canvas baseChart [datasets]="barChartDataGraph1" [colors]="barChartColorsGraph1" [labels]="barChartLabelsGraph1"
+      [options]="barChartOptionsGraph1" [legend]="barChartLegendGraph1" [chartType]="barChartTypeGraph">
+    </canvas>
+  </div>
+</div>
+<!-- Not user now ends -->
+
+<div *ngIf="!isGraphLoading && isClicked" class="container-fluid mb-4">
+  <div class="row text-center">
+    <div class="col-md-3 mb-2">
+      <button (click)="makeGraph1('line')" mat-raised-button color="accent" type="submit"
+        class="button">Line&nbsp;<i class="fa fa-line-chart"></i></button>
+    </div>
+    <div class="col-md-3 mb-2">
+      <button (click)="makeGraph1('bar')" mat-stroked-button type="submit"
+        class="button">Bar&nbsp;<i class="fa fa-bar-chart"></i></button>
+    </div>
+  </div>
+  <div style="display: block">
+    <canvas baseChart [datasets]="barChartDataGraph2" [colors]="barChartColorsGraph2" [labels]="barChartLabelsGraph"
+      [options]="barChartOptionsGraph2" [legend]="barChartLegendGraph2" [chartType]="barChartTypeGraph">
+    </canvas>
+  </div>
+  <div class="row text-center">
+    <div class="col-md-6 mb-2">
+      <button (click)="viewCompany1Details()" mat-raised-button color="accent" type="submit"
+        class="button">{{companyForm.value.company1.code | uppercase}}</button>
+    </div>
+    <div class="col-md-6 mb-2">
+      <button (click)="viewCompany2Details()" mat-raised-button color="warn" type="submit"
+        class="button">{{companyForm.value.company2.code | uppercase}}</button>
+    </div>
+  </div>
+</div>
+<mat-spinner style="margin:0 auto;" [diameter]="50" color="warn" *ngIf="isGraphLoading"></mat-spinner>

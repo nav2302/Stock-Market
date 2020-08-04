@@ -1,0 +1,24 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+server:
+  port: 8083
+spring:
+  application:
+    name: excel-service
+  datasource:
+    password: meandmine12
+    url: jdbc:mysql://localhost:3306/stockmarket?autoReconnect=true&createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        dialect: org.hibernate.dialect.MySQL5Dialect

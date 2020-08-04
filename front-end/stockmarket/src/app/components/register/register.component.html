@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+<div class="mb-5"></div>
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <mat-card class="mat-elevation-z8">
+                <div class="text-center" style="background-color:#673AB7;
+                color: white;padding:10px; border-radius: 5px; font-size:large;">Register&nbsp;
+                    <i class="fa fa-unlock"></i></div>
+                <div class="card-body">
+
+                    <div class="col-md-9 mx-auto">
+                        <form [formGroup]="registerForm" (ngSubmit)="register()">
+                            <div class="form-group row mb-4">
+                                <label for="email" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-envelope fa-lg"></i></label>
+                                <div class="col-md-11">
+                                    <input class="form-control" formControlName="email" placeholder="xyz@gmail.com">
+                                    <div *ngIf="registerForm.controls['email'].invalid && 
+                            (registerForm.controls['email'].dirty || 
+                            registerForm.controls['email'].touched)">
+                                        <div *ngIf="registerForm.controls['email'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            E-mail is required.
+                                        </div>
+                                        <div *ngIf="registerForm.controls['email'].errors.pattern"
+                                            class="invalid-feedback d-block">
+                                            Please enter a valid E-mail.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="password" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-key fa-lg"></i></label>
+                                <div class="col-md-11">
+                                    <input type="text" class="form-control" formControlName="password"
+                                        placeholder="password">
+                                    <div *ngIf="registerForm.controls['password'].invalid && 
+                            (registerForm.controls['password'].dirty || 
+                            registerForm.controls['password'].touched)">
+                                        <div *ngIf="registerForm.controls['password'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="registerForm.controls['password'].errors.pattern"
+                                            class="invalid-feedback d-block">
+                                            Minimum 8 characters and Must contain uppercase letters, special characters
+                                            and numbers.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="username" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-user fa-lg"></i></label>
+                                <div class="col-md-11">
+                                    <input class="form-control" formControlName="username" placeholder="abcd_1234">
+                                    <div *ngIf="registerForm.controls['username'].invalid && 
+                            (registerForm.controls['username'].dirty || 
+                            registerForm.controls['username'].touched)">
+                                        <div *ngIf="registerForm.controls['username'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            Username is required.
+                                        </div>
+                                        <div *ngIf="registerForm.controls['username'].errors.pattern"
+                                            class="invalid-feedback d-block">
+                                            Minimum length is 8 and maximum is 20 and Must contain '_' character.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="age" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-child fa-2x"></i></label>
+                                <div class="col-md-11">
+                                    <input type="number" class="form-control" formControlName="age" placeholder="Age">
+                                    <div *ngIf="registerForm.controls['age'].invalid && 
+                            (registerForm.controls['age'].dirty || 
+                            registerForm.controls['age'].touched)">
+                                        <div *ngIf="registerForm.controls['age'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            age is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="phone" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-mobile fa-2x"></i></label>
+                                <div class="col-md-11">
+                                    <input class="form-control" formControlName="phone" placeholder="9999999999">
+                                    <div *ngIf="registerForm.controls['phone'].invalid && 
+                            (registerForm.controls['phone'].dirty || 
+                            registerForm.controls['phone'].touched)">
+                                        <div *ngIf="registerForm.controls['phone'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            Number is required.
+                                        </div>
+                                        <div *ngIf="registerForm.controls['phone'].errors.pattern"
+                                            class="invalid-feedback d-block">
+                                            Enter a valid 10 digit Mobile number.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="text-center">
+                                <button type="submit" mat-raised-button color="primary">Submit</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+    <div>

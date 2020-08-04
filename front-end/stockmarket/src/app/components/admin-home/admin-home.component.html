@@ -1,0 +1,65 @@
+<app-navbar></app-navbar>
+<div class="mb-4"></div>
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form>
+                <mat-form-field>
+                    <mat-placeholder class="placeholder">Search</mat-placeholder>
+                    <input (keyup.enter)="onEnter($event)" type="text" matInput [matAutocomplete]="auto"
+                        [formControl]="myControl">
+                    <mat-icon matSuffix><a (click)=onEnter($event)><i class="fa fa-search text-warning">
+                            </i></a></mat-icon>
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.companyCode">
+                            {{ option.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- List of Stock Exchanges with companies listed on them and their current market price -->
+<div class="container mb-4" *ngFor="let stockExchanges of map | keyvalue">
+    <div class="col-md-8 mx-auto">
+        <div class="card text-center">
+            <div class="card-header"><strong class="display-4">
+                    {{ stockExchanges.key }}</strong></div>
+            <div class="list-group list-group-flush">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let company of stockExchanges.value">
+                        <a class="text-warning"
+                            [routerLink]="['/admin/company-details', company.companyCode]">{{ company.name }} </a>
+                        <button *ngIf = "company.active" (click) = "actdeact(company)" mat-mini-fab color="primary">
+                            <mat-icon>done</mat-icon>
+                        </button>
+                        <button *ngIf = "!company.active" (click) = "actdeact(company)" mat-mini-fab color="warn">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <button (click) = "deleteCompany(company.id,stockExchanges.key)" mat-mini-fab color="warn"
+                        [disabled]="!company.active"
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button  (click) = "editCompany(company, stockExchanges.key)" mat-mini-fab color="accent"
+                        [disabled]="!company.active"
+                        >
+                            <mat-icon>edit</mat-icon>
+                        </button>
+
+                        <button (click) = "uploadDataForCompany(company.id)" mat-icon-button aria-label="Whatever">
+                            <mat-icon>cloud_upload</mat-icon>
+                          </button>
+                    </li>
+                </ul>
+                <div class="mb-4"></div>
+                <div class="text-center mb-4">
+                    <button (click) = "addCompany(stockExchanges.key)" mat-raised-button>Add Company&nbsp;<i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

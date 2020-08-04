@@ -1,0 +1,41 @@
+a:hover{ text-decoration:none; }
+
+/* not active */
+.nav-pills .pill-1 .nav-link:not(.active) {
+    background-color:white;
+    color:#212121;
+}
+
+.nav-pills .pill-2 .nav-link:not(.active) {
+    background-color:white;
+    color:#212121;
+}
+
+.nav-pills .pill-3 .nav-link:not(.active) {
+    background-color:white;
+    color:#212121;
+}
+.nav-pills .pill-4 .nav-link:not(.active) {
+    background-color:white;
+    color:#212121;
+}
+
+
+/* active (faded) */
+.nav-pills .pill-1 .nav-link {
+    background-color:#673AB7;
+    color: white;
+}
+
+.nav-pills .pill-2 .nav-link {
+    background-color: #673AB7;
+}
+
+.nav-pills .pill-3 .nav-link {
+    background-color: #673AB7;
+    color: white;
+}
+.nav-pills .pill-4 .nav-link {
+    background-color: #673AB7;
+    color: white;
+}

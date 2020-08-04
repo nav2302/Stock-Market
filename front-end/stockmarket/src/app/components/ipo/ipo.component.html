@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="mb-4"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card chart-card border-dark">
+                <div class="card-body pb-0">
+                    <h4 class="card-title font-weight-bold text-center">
+
+                        All IPOs for <span class="text-warning">{{ companyName?.companyName }}</span></h4>
+                    <div class="d-flex justify-content-between">
+                        <p style="font-size:2rem" class="align-self-end"><span class="text-success">
+                                Current price <i class="fa fa-money" aria-hidden="true"></i>
+                            </span></p>
+                        <p class="align-self-end pb-2"><span class="text-success">
+                                <i class="fa fa-long-arrow-up"></i>&nbsp;(0.03%)</span></p>
+                    </div>
+                </div>
+                <hr>
+                <ng-container *ngIf="ipos">
+                    <table class="table table-hover table-responsive-sm text-warning">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th class="text-success">Price /share</th>
+                                <th>Listed On</th>
+                                <th class="text-success">Total Shares</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let ipo of ipos">
+                            <tr>
+                                <td>{{ ipo.modifyDate | date:'short'}}&nbsp;<i class="fa fa-calendar"
+                                        aria-hidden="true"></i></td>
+                                <td class="text-success">{{ ipo.price | currency : 'INR'}}</td>
+                                <td>{{ ipo.stockExchange }}</td>
+                                <td class="text-success">{{ ipo.totalShares }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+
+
+                <div class="text-center mb-4">
+                    <span *ngIf = "hasPrevious"> 
+                        <a class="btn btn-dark text-light"  (click) = "getIpoPaging(page.number-1, page.size)">Previous</a>
+                    </span>
+                    <span *ngIf = "hasNext"> <a class="btn btn-dark text-light"
+                        (click) = "getIpoPaging(page.number+1, page.size)">Next</a>
+                    </span> 
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

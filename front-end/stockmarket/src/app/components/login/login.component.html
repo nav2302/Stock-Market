@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+<div class="mb-5"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <mat-card class="mat-elevation-z8">
+                <div class="card-body">
+                    <div class="col-md-9 mx-auto">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()">
+                            <div class="form-group row mb-4">
+                                <label for="email" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-users"></i></label>
+                                <div class="col-md-11">
+                                    <input class="form-control" formControlName="email" placeholder="xyz@gmail.com">
+                                    <div *ngIf="loginForm.controls['email'].invalid && 
+                            (loginForm.controls['email'].dirty || 
+                            loginForm.controls['email'].touched)">
+                                        <div *ngIf="loginForm.controls['email'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="loginForm.controls['email'].errors.email"
+                                            class="invalid-feedback d-block">
+                                            Email is Inavlid.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-1 col-form-label">
+                                    <i style="color:#673AB7;" class="fa fa-key"></i></label>
+                                <div class="col-md-11">
+                                    <input type="password" class="form-control" formControlName="password"
+                                        placeholder="Password">
+                                    <div *ngIf="loginForm.controls['password'].invalid && 
+                            (loginForm.controls['password'].dirty || 
+                            loginForm.controls['password'].touched)">
+                                        <div *ngIf="loginForm.controls['password'].errors.required"
+                                            class="invalid-feedback d-block">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="loginForm.controls['password'].errors.minlength"
+                                            class="invalid-feedback d-block">
+                                            Minimum 6 characters required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" mat-raised-button color="primary">Login</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
+
+                </div>
+            </mat-card>
+            <div class="text-center">
+                <i> Not a member yet?</i><br /><br />
+                <a routerLink="/register"><button mat-raised-button>Register</button></a>
+            </div>
+        </div>
+    </div>
+    <div>
